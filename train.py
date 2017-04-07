@@ -16,12 +16,12 @@ from tensorflow.contrib import learn
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
 tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the negative data.")
-tf.flags.DEFINE_string("dev_neg_file", "./data-cnn/dev-neg",)
-tf.flags.DEFINE_string("dev_pos_file", "./data-cnn/dev-pos",)
-tf.flags.DEFINE_string("train_neg_file", "./data-cnn/train0-neg",)
-tf.flags.DEFINE_string("train_pos_file", "./data-cnn/train0-pos",)
-tf.flags.DEFINE_string("test_neg_file", "./data-cnn/test0-neg",)
-tf.flags.DEFINE_string("test_pos_file", "./data-cnn/test0-pos",)
+tf.flags.DEFINE_string("dev_neg_file", "./data-cnn/dev-neg", "dev_neg")
+tf.flags.DEFINE_string("dev_pos_file", "./data-cnn/dev-pos", "dev_pos")
+tf.flags.DEFINE_string("train_neg_file", "./data-cnn/train0-neg", "train_neg")
+tf.flags.DEFINE_string("train_pos_file", "./data-cnn/train0-pos", "train_pos")
+tf.flags.DEFINE_string("test_neg_file", "./data-cnn/test0-neg", "test_neg")
+tf.flags.DEFINE_string("test_pos_file", "./data-cnn/test0-pos", "test_pos")
 
 
 # Model Hyperparameters
