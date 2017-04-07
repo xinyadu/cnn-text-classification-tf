@@ -52,37 +52,27 @@ print("")
 # Data Preparation
 # ==================================================
 
+
 # Load data
 print("Loading data...")
-x_train_text, y_train = data_helpers.load_data_and_labels(FLAGS.train_neg_file, FLAGS.train_pos_file)
+x_text, y = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
 
 # Build vocabulary
-max_document_length = max([len(x.split(" ")) for x in x_train_text])
+max_document_length = max([len(x.split(" ")) for x in x_text])
 vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-x_train = np.array(list(vocab_processor.fit_transform(x_train_text)))
+x = np.array(list(vocab_processor.fit_transform(x_text)))
 
 # Randomly shuffle data
 np.random.seed(10)
-shuffle_indices = np.random.permutation(np.arange(len(y_train)))
-x_train = x_train[shuffle_indices]
-y_train = y_train[shuffle_indices]
-
-# Load data dev/test
-print("Loading data...")
-x_dev_text, y_dev = data_helpers.load_data_and_labels(FLAGS.test_neg_file, FLAGS.test_pos_file)
-
-# Build vocabulary
-# max_document_length = max([len(x.split(" ")) for x in x_test_text])
-# vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-x_dev = np.array(list(vocab_processor.transform(x_dev_text)))
-
+shuffle_indices = np.random.permutation(np.arange(len(y)))
+x_shuffled = x[shuffle_indices]
+y_shuffled = y[shuffle_indices]
 
 # Split train/test set
 # TODO: This is very crude, should use cross-validation
-# dev_sample_index = -1 * int(FLAGS.dev_sample_percentage * float(len(y)))
-# x_train, x_dev = x_shuffled[:dev_sample_index], x_shuffled[dev_sample_index:]
-# y_train, y_dev = y_shuffled[:dev_sample_index], y_shuffled[dev_sample_index:]
-
+dev_sample_index = -1 * int(FLAGS.dev_sample_percentage * float(len(y)))
+x_train, x_dev = x_shuffled[:dev_sample_index], x_shuffled[dev_sample_index:]
+y_train, y_dev = y_shuffled[:dev_sample_index], y_shuffled[dev_sample_index:]
 print("Vocabulary Size: {:d}".format(len(vocab_processor.vocabulary_)))
 print("Train/Dev split: {:d}/{:d}".format(len(y_train), len(y_dev)))
 
