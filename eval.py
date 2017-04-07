@@ -81,3 +81,6 @@ if y_test is not None:
     correct_predictions = float(sum(all_predictions == y_test))
     print("Total number of test examples: {}".format(len(y_test)))
     print("Accuracy: {:g}".format(correct_predictions/float(len(y_test))))
+
+    from sklearn import metrics
+    print metrics.classification_report(y_test, all_predictions, digits = 4)
