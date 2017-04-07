@@ -48,23 +48,26 @@ print("")
 
 # Load data
 print("Loading data...")
-x_text, y = data_helpers.load_data_and_labels()
+x_train_text, y_train = data_helpers.load_data_and_labels()
+x_dev_text, y_dev = data_helpers.load_data_and_labels_dev()
 
 # Build vocabulary
-max_document_length = max([len(x.split(" ")) for x in x_text])
+max_document_length = max([len(x.split(" ")) for x in x_train_text])
 vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-x = np.array(list(vocab_processor.fit_transform(x_text)))
+x_train = np.array(list(vocab_processor.fit_transform(x_train_text)))
 
 # Randomly shuffle data
-np.random.seed(10)
-shuffle_indices = np.random.permutation(np.arange(len(y)))
-x_shuffled = x[shuffle_indices]
-y_shuffled = y[shuffle_indices]
+# np.random.seed(10)
+# shuffle_indices = np.random.permutation(np.arange(len(y)))
+# x_shuffled = x[shuffle_indices]
+# y_shuffled = y[shuffle_indices]
 
 # Split train/test set
 # TODO: This is very crude, should use cross-validation
-x_train, x_dev = x_shuffled[:-1000], x_shuffled[-1000:]
-y_train, y_dev = y_shuffled[:-1000], y_shuffled[-1000:]
+# x_train, x_dev = x_shuffled[:-1000], x_shuffled[-1000:]
+# y_train, y_dev = y_shuffled[:-1000], y_shuffled[-1000:]
+x_dev = np.array(list(vocab_processor.transform(x_dev_text)))
+
 print("Vocabulary Size: {:d}".format(len(vocab_processor.vocabulary_)))
 print("Train/Dev split: {:d}/{:d}".format(len(y_train), len(y_dev)))
 
