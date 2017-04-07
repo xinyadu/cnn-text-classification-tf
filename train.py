@@ -28,6 +28,13 @@ tf.flags.DEFINE_integer("checkpoint_every", 100, "Save model after this many ste
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
 
+tf.flags.DEFINE_string("dev_neg_file", "./data-cnn/dev-neg", "dev_neg")
+tf.flags.DEFINE_string("dev_pos_file", "./data-cnn/dev-pos", "dev_pos")
+tf.flags.DEFINE_string("train_neg_file", "./data-cnn/train0-neg", "train_neg")
+tf.flags.DEFINE_string("train_pos_file", "./data-cnn/train0-pos", "train_pos")
+tf.flags.DEFINE_string("test_neg_file", "./data-cnn/test0-neg", "test_neg")
+tf.flags.DEFINE_string("test_pos_file", "./data-cnn/test0-pos", "test_pos")
+
 FLAGS = tf.flags.FLAGS
 FLAGS._parse_flags()
 print("\nParameters:")
